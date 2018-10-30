@@ -1,21 +1,31 @@
 package com.example.sande.walmart_onlineshopping;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class HomePageAdaptor extends RecyclerView.Adapter<HomePageAdaptor.ViewHolder> {
 
+    private ClickListener clickListener;
     List<HomeDepartmentData> homeDepartmentDataList;
+    Context ctx;
 
-    public HomePageAdaptor(List<HomeDepartmentData> homeDepartmentDataList) {
+    public HomePageAdaptor(List<HomeDepartmentData> homeDepartmentDataList, Context ctx) {
         this.homeDepartmentDataList = homeDepartmentDataList;
+        this.ctx = ctx;
     }
 
     @Override
@@ -28,8 +38,10 @@ public class HomePageAdaptor extends RecyclerView.Adapter<HomePageAdaptor.ViewHo
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
 
         HomeDepartmentData obj = homeDepartmentDataList.get(position);
+        Picasso.with(ctx).load(obj.getImage()).into(viewHolder.iv);
         viewHolder.tv.setText(obj.getName());
-        viewHolder.iv.setImageResource(obj.getImage());
+        
+
     }
 
     @Override
@@ -37,14 +49,27 @@ public class HomePageAdaptor extends RecyclerView.Adapter<HomePageAdaptor.ViewHo
         return homeDepartmentDataList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
     {
         ImageView iv;
         TextView tv;
+        Context ctx;
         public ViewHolder(View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
             iv = itemView.findViewById(R.id.iv_homeDepartment);
             tv = itemView.findViewById(R.id.tv_homeDepartment);
+
         }
+
+        @Override
+        public void onClick(View v) {
+
+        }
+
+    }
+    public interface ClickListener{
+
+        public void itemClicked(View view,int position);
     }
 }

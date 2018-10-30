@@ -34,6 +34,7 @@ public class LoginFragment extends Fragment {
     EditText editText_mobile,editText_password;
     String url2 = "http://rjtmobile.com/aamir/e-commerce/android-app/shop_login.php";
     ProgressDialog dialog;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 

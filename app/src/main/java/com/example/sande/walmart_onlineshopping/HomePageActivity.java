@@ -1,5 +1,6 @@
 package com.example.sande.walmart_onlineshopping;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -8,6 +9,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -21,26 +23,40 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class HomePageActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener,HomePageAdaptor.ClickListener {
 
-    int[] images = {R.drawable.pic_vf_food1,R.drawable.pic_vf_womenclothing,R.drawable.pic_vf_friday,
-            R.drawable.pic_vf_haloween,R.drawable.pic_vf_food2,R.drawable.pic_vf_iphone,R.drawable.pic_vf_clothing};
-    String[] department_name = {"food1","women","Black Friday","Haloween","food2","i Phone","Clothing"};
+    int[] images = {R.drawable.pic_vf_food1, R.drawable.pic_vf_womenclothing, R.drawable.pic_vf_friday,
+            R.drawable.pic_vf_haloween, R.drawable.pic_vf_food2, R.drawable.pic_vf_iphone, R.drawable.pic_vf_clothing};
+    String[] department_name = {"food1", "women", "Black Friday", "Haloween", "food2", "i Phone", "Clothing"};
 
     List<HomeDepartmentData> myList;
     HomePageAdaptor adapter;
     RecyclerView recyclerView;
     ViewFlipper flipper;
+    String url2 ="http://rjtmobile.com/ansari/shopingcart/androidapp/cust_category.php";
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                    switch (menuItem.getItemId())
-                    {
+                    switch (menuItem.getItemId()) {
                         case R.id.navigation_home:
                             Toast.makeText(HomePageActivity.this, "home", Toast.LENGTH_SHORT).show();
                             return true;
@@ -54,6 +70,7 @@ public class HomePageActivity extends AppCompatActivity
                     return false;
                 }
             };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,15 +83,15 @@ public class HomePageActivity extends AppCompatActivity
 
 
         myList = new ArrayList<>();
-        adapter = new HomePageAdaptor(myList);
+        adapter = new HomePageAdaptor(myList,getApplicationContext());
         flipper = findViewById(R.id.vFlipper);
 
         recyclerView = findViewById(R.id.recyclerView_HomePage);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(adapter);
-        create();
+        //recyclerView.setAdapter(adapter);
+        //create();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -85,20 +102,66 @@ public class HomePageActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        String apiKey = getIntent().getStringExtra("API key");
-        String userId = getIntent().getStringExtra("user_id");
 
-        for(int i = 0; i<images.length;i++)
-        {
+
+        for (int i = 0; i < images.length; i++) {
             flipImage(images[i]);
         }
 
+        StringRequest request = new StringRequest(Request.Method.POST, url2, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                Toast.makeText(HomePageActivity.this, "" + response, Toast.LENGTH_LONG).show();
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray("category");
+                    for(int i=0;i< jsonArray.length();i++)
+                    {
+                        JSONObject mydata = jsonArray.getJSONObject(i);
+                        String myId = mydata.getString("cid");
+                        String myName = mydata.getString("cname");
+                        String myImage = mydata.getString("cimagerl");
+                        String myDescription = mydata.getString("cdiscription");
+
+                        HomeDepartmentData data = new HomeDepartmentData(myImage,myName);
+                        myList.add(data);
+
+                    }
+                    recyclerView.setAdapter(adapter);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                /*dialog.dismiss();
+                Toast.makeText(getActivity(), "" + error, Toast.LENGTH_SHORT).show();*/
+            }
+        })
+        {
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                Log.i("wheeee", "getParams: hooooooooooooooooooooooooooooooooooo");
+
+                String apiKey = getIntent().getStringExtra("API key");
+                String userId = getIntent().getStringExtra("user_id");
+                params.put("api_key", apiKey);
+                params.put("user_id", userId);
+
+                return params;
+            }
+
+        };
+        RequestQueue request2 = Volley.newRequestQueue(this);
+        request2.add(request);
+
     }
-
-
-
-
-
 
 
     private void flipImage(int i) {
@@ -107,8 +170,8 @@ public class HomePageActivity extends AppCompatActivity
         flipper.addView(view);
         flipper.setFlipInterval(3000);
         flipper.setAutoStart(true);
-        flipper.setInAnimation(this,android.R.anim.slide_in_left);
-        flipper.setOutAnimation(this,android.R.anim.slide_out_right);
+        flipper.setInAnimation(this, android.R.anim.slide_in_left);
+        flipper.setOutAnimation(this, android.R.anim.slide_out_right);
     }
 
     @Override
@@ -167,13 +230,10 @@ public class HomePageActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    public void create()
-    {
-        for(int i =0;i<images.length;i++)
-        {
-            HomeDepartmentData homeDepartmentData = new HomeDepartmentData(images[i],department_name[i]);
-            myList.add(homeDepartmentData);
-        }
+
+    @Override
+    public void itemClicked(View view, int position) {
 
     }
+
 }
