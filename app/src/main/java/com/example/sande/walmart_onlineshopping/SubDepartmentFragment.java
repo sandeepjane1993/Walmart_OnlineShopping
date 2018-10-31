@@ -26,8 +26,10 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class SubDepartmentFragment extends Fragment implements HomePageAdaptor.ClickListener {
 
@@ -35,14 +37,18 @@ public class SubDepartmentFragment extends Fragment implements HomePageAdaptor.C
     List<HomeDepartmentData> myList;
     HomePageAdaptor adapter;
     RecyclerView recyclerView;
+    String[] scid;
     String url2 = "http://rjtmobile.com/ansari/shopingcart/androidapp/cust_sub_category.php";
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_sub_department,container,false);
 
+
         myList = new ArrayList<>();
         adapter = new HomePageAdaptor(myList,getContext());
+        adapter.setClickListener(this);
         recyclerView = view.findViewById(R.id.recyclerView_SubDepartment);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -51,20 +57,24 @@ public class SubDepartmentFragment extends Fragment implements HomePageAdaptor.C
             @Override
             public void onResponse(String response) {
 
-                Toast.makeText(getActivity(), "" + response, Toast.LENGTH_LONG).show();
+               // Toast.makeText(getActivity(), "" + response, Toast.LENGTH_LONG).show();
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     JSONArray jsonArray = jsonObject.getJSONArray("subcategory");
+                    scid = new String[jsonArray.length()];
                     for(int i=0;i< jsonArray.length();i++)
                     {
+
                         JSONObject mydata = jsonArray.getJSONObject(i);
                         String myId = mydata.getString("scid");
+                        scid[i] = myId;
                         String myName = mydata.getString("scname");
                         String myImage = mydata.getString("scimageurl");
                         String myDescription = mydata.getString("scdiscription");
 
                         HomeDepartmentData data = new HomeDepartmentData(myImage,myName);
                         myList.add(data);
+
 
                     }
                     recyclerView.setAdapter(adapter);
@@ -108,9 +118,23 @@ public class SubDepartmentFragment extends Fragment implements HomePageAdaptor.C
         return view;
     }
 
+
     @Override
     public void itemClicked(View view, int position) {
+        Bundle b = getArguments();
+        String cid =   b.getString("key1");
+        String apiKey =   b.getString("key2");
+        String userId =   b.getString("key3");
 
+        ProductListFragment productListFragment = new ProductListFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("key11",cid);
+        bundle.putString("key22",scid[position]);
+        bundle.putString("key33",apiKey);
+        bundle.putString("key44",userId);
+        Log.i(TAG, "final scid: " + scid[position]);
+        productListFragment.setArguments(bundle);
 
+        getFragmentManager().beginTransaction().replace(R.id.id_ProductBaseActivity,productListFragment).addToBackStack("null").commit();
     }
 }

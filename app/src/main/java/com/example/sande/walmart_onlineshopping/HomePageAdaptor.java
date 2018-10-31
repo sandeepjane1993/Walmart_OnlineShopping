@@ -57,7 +57,6 @@ public class HomePageAdaptor extends RecyclerView.Adapter<HomePageAdaptor.ViewHo
     {
         ImageView iv;
         TextView tv;
-        Context ctx;
         public ViewHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
