@@ -42,6 +42,7 @@ import java.util.Map;
 public class HomePageActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,HomePageAdaptor.ClickListener {
 
+    private static final String TAG = "passdata";
     int[] images = {R.drawable.pic_vf_food1, R.drawable.pic_vf_womenclothing, R.drawable.pic_vf_friday,
             R.drawable.pic_vf_haloween, R.drawable.pic_vf_food2, R.drawable.pic_vf_iphone, R.drawable.pic_vf_clothing};
     String[] department_name = {"food1", "women", "Black Friday", "Haloween", "food2", "i Phone", "Clothing"};
@@ -51,6 +52,7 @@ public class HomePageActivity extends AppCompatActivity
     RecyclerView recyclerView;
     ViewFlipper flipper;
     String url2 ="http://rjtmobile.com/ansari/shopingcart/androidapp/cust_category.php";
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -84,6 +86,7 @@ public class HomePageActivity extends AppCompatActivity
 
         myList = new ArrayList<>();
         adapter = new HomePageAdaptor(myList,getApplicationContext());
+        adapter.setClickListener(this);
         flipper = findViewById(R.id.vFlipper);
 
         recyclerView = findViewById(R.id.recyclerView_HomePage);
@@ -112,7 +115,7 @@ public class HomePageActivity extends AppCompatActivity
             @Override
             public void onResponse(String response) {
 
-                Toast.makeText(HomePageActivity.this, "" + response, Toast.LENGTH_LONG).show();
+               // Toast.makeText(HomePageActivity.this, "" + response, Toast.LENGTH_LONG).show();
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     JSONArray jsonArray = jsonObject.getJSONArray("category");
@@ -151,6 +154,7 @@ public class HomePageActivity extends AppCompatActivity
 
                 String apiKey = getIntent().getStringExtra("API key");
                 String userId = getIntent().getStringExtra("user_id");
+                Log.i(TAG, "getParams: api " + apiKey +"user = " +userId);
                 params.put("api_key", apiKey);
                 params.put("user_id", userId);
 
@@ -234,6 +238,19 @@ public class HomePageActivity extends AppCompatActivity
     @Override
     public void itemClicked(View view, int position) {
 
+       // getSupportFragmentManager().beginTransaction().replace
+                //(R.id.id_HomePageActivity,new SubDepartmentFragment()).addToBackStack("null").commit();
+
+        String[] array = {"107","108","109","111","112","113","114","115"};
+        String cid = array[position];
+        String myApiKey = getIntent().getStringExtra("API key");
+        String myUserId = getIntent().getStringExtra("user_id");
+        Intent i = new Intent(HomePageActivity.this,ProductBaseActivity.class);
+        i.putExtra("key1",cid);
+        i.putExtra("key2",myApiKey);
+        i.putExtra("key3",myUserId);
+        Log.i(TAG, "itemClicked: cid = " + cid + "api = "+ myApiKey+"user_id = "+ myUserId);
+        startActivity(i);
     }
 
 }

@@ -40,8 +40,12 @@ public class HomePageAdaptor extends RecyclerView.Adapter<HomePageAdaptor.ViewHo
         HomeDepartmentData obj = homeDepartmentDataList.get(position);
         Picasso.with(ctx).load(obj.getImage()).into(viewHolder.iv);
         viewHolder.tv.setText(obj.getName());
-        
 
+
+    }
+
+    public void setClickListener(ClickListener clickListener) {
+        this.clickListener = clickListener;
     }
 
     @Override
@@ -65,6 +69,10 @@ public class HomePageAdaptor extends RecyclerView.Adapter<HomePageAdaptor.ViewHo
         @Override
         public void onClick(View v) {
 
+            if(clickListener != null)
+            {
+                clickListener.itemClicked(v,getAdapterPosition());
+            }
         }
 
     }
