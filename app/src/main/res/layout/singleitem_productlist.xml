@@ -15,7 +15,8 @@
         android:id="@+id/imgView_PL"
         android:layout_width="150dp"
         android:layout_height="90dp"
-        app:srcCompat="@drawable/pic_vf_womenclothing" />
+        app:srcCompat="@drawable/pic_vf_womenclothing"
+        android:contentDescription="This image is for the productlist " />
     <LinearLayout
         android:background="#eff2ef"
         android:orientation="vertical"
@@ -61,5 +62,5 @@
         android:background="#0f0f0f"
         android:layout_width="match_parent"
         android:layout_height="2dp"/>
-    
+
 </LinearLayout>

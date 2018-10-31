@@ -28,12 +28,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ProductListFragment extends Fragment {
+public class ProductListFragment extends Fragment implements ProductListAdaptor.ClickListener {
 
     List<ProductListData> myList;
     ProductListAdaptor adapter;
     RecyclerView recyclerView;
     String url2 = "http://rjtmobile.com/ansari/shopingcart/androidapp/product_details.php";
+    String[] pNameArray;
+    String[] pImageArray;
+    String[] pPriceArray;
+    String[] pDescriptionArray;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -42,6 +46,7 @@ public class ProductListFragment extends Fragment {
 
         myList = new ArrayList<>();
         adapter = new ProductListAdaptor(myList,getContext());
+        adapter.setClickListener(this);
         recyclerView = view.findViewById(R.id.recyclerView_productList);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -54,6 +59,10 @@ public class ProductListFragment extends Fragment {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     JSONArray jsonArray = jsonObject.getJSONArray("products");
+                    pNameArray = new String[jsonArray.length()];
+                    pImageArray = new String[jsonArray.length()];
+                    pPriceArray = new String[jsonArray.length()];
+                    pDescriptionArray = new String[jsonArray.length()];
                     for(int i=0;i< jsonArray.length();i++)
                     {
 
@@ -65,6 +74,10 @@ public class ProductListFragment extends Fragment {
                         String myProductDescription = mydata.getString("discription");
                         String myProductImage = mydata.getString("image");
 
+                        pNameArray[i] = myProductName;
+                        pImageArray[i] = myProductImage;
+                        pPriceArray[i] = myProductPrice;
+                        pDescriptionArray[i] = myProductDescription;
 
                         ProductListData data = new ProductListData(myProductImage,myProductName,"$" + myProductPrice,"Free Shipping");
                         myList.add(data);
@@ -112,5 +125,21 @@ public class ProductListFragment extends Fragment {
         request4.add(request);
 
         return view;
+    }
+
+    @Override
+    public void itemClicked(View view, int position) {
+
+        ProductDetailFragment productDetailFragment = new ProductDetailFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("key111",pNameArray[position]);
+        bundle.putString("key222",pImageArray[position]);
+        bundle.putString("key333",pPriceArray[position]);
+        bundle.putString("key444",pDescriptionArray[position]);
+        productDetailFragment.setArguments(bundle);
+
+        getFragmentManager().beginTransaction().
+                replace(R.id.id_ProductBaseActivity, productDetailFragment).addToBackStack("null").commit();
+
     }
 }

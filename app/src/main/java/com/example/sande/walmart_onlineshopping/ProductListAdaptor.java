@@ -15,6 +15,7 @@ import java.util.List;
 
 public class ProductListAdaptor extends RecyclerView.Adapter<ProductListAdaptor.ViewHolder> {
 
+    private ClickListener clickListener;
     List<ProductListData> productListDataList;
     Context ctx;
 
@@ -39,12 +40,17 @@ public class ProductListAdaptor extends RecyclerView.Adapter<ProductListAdaptor.
         viewHolder.tv_shipping.setText("Free Shipping");
     }
 
+    public void setClickListener(ClickListener clickListener) {
+        this.clickListener = clickListener;
+    }
+
     @Override
     public int getItemCount() {
         return productListDataList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
 
         ImageView iv;
         TextView tv_pname,tv_price,tv_shipping;
@@ -52,10 +58,24 @@ public class ProductListAdaptor extends RecyclerView.Adapter<ProductListAdaptor.
         public ViewHolder(View itemView) {
             super(itemView);
 
+            itemView.setOnClickListener(this);
             iv = itemView.findViewById(R.id.imgView_PL);
             tv_pname = itemView.findViewById(R.id.tv_name_PL);
             tv_price = itemView.findViewById(R.id.tv_price_PL);
             tv_shipping = itemView.findViewById(R.id.tv_shippingDetails_Pl);
         }
+
+        @Override
+        public void onClick(View v) {
+            if(clickListener != null)
+            {
+                clickListener.itemClicked(v,getAdapterPosition());
+            }
+        }
+    }
+
+    public interface ClickListener
+    {
+        public void itemClicked(View view, int position);
     }
 }
