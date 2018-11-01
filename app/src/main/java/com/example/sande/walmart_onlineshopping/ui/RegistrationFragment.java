@@ -1,10 +1,7 @@
-package com.example.sande.walmart_onlineshopping;
+package com.example.sande.walmart_onlineshopping.ui;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +16,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.sande.walmart_onlineshopping.R;
+import com.example.sande.walmart_onlineshopping.ui.LoginFragment;
 
 import java.util.HashMap;
 import java.util.Map;

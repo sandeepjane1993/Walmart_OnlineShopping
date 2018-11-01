@@ -1,8 +1,10 @@
-package com.example.sande.walmart_onlineshopping;
+package com.example.sande.walmart_onlineshopping.ui;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.sande.walmart_onlineshopping.R;
 
 public class SplashActivity extends AppCompatActivity {
 

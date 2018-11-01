@@ -1,11 +1,9 @@
-package com.example.sande.walmart_onlineshopping;
+package com.example.sande.walmart_onlineshopping.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -29,6 +27,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.sande.walmart_onlineshopping.adapters.HomePageAdaptor;
+import com.example.sande.walmart_onlineshopping.R;
+import com.example.sande.walmart_onlineshopping.data.HomeDepartmentData;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -64,6 +65,8 @@ public class HomePageActivity extends AppCompatActivity
                             return true;
                         case R.id.navigation_dashboard:
                             Toast.makeText(HomePageActivity.this, "cart", Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(HomePageActivity.this,CartActivity.class);
+                            startActivity(i);
                             return true;
                         case R.id.navigation_notifications:
                             Toast.makeText(HomePageActivity.this, "account update", Toast.LENGTH_SHORT).show();

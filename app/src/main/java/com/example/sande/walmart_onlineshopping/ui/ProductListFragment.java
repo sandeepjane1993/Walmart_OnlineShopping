@@ -1,8 +1,6 @@
-package com.example.sande.walmart_onlineshopping;
+package com.example.sande.walmart_onlineshopping.ui;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,6 +16,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.sande.walmart_onlineshopping.adapters.ProductListAdaptor;
+import com.example.sande.walmart_onlineshopping.R;
+import com.example.sande.walmart_onlineshopping.data.ProductListData;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,6 +35,7 @@ public class ProductListFragment extends Fragment implements ProductListAdaptor.
     ProductListAdaptor adapter;
     RecyclerView recyclerView;
     String url2 = "http://rjtmobile.com/ansari/shopingcart/androidapp/product_details.php";
+    String[] pIdArray;
     String[] pNameArray;
     String[] pImageArray;
     String[] pPriceArray;
@@ -59,6 +61,7 @@ public class ProductListFragment extends Fragment implements ProductListAdaptor.
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     JSONArray jsonArray = jsonObject.getJSONArray("products");
+                    pIdArray = new String[jsonArray.length()];
                     pNameArray = new String[jsonArray.length()];
                     pImageArray = new String[jsonArray.length()];
                     pPriceArray = new String[jsonArray.length()];
@@ -74,6 +77,7 @@ public class ProductListFragment extends Fragment implements ProductListAdaptor.
                         String myProductDescription = mydata.getString("discription");
                         String myProductImage = mydata.getString("image");
 
+                        pIdArray[i] = myProductId;
                         pNameArray[i] = myProductName;
                         pImageArray[i] = myProductImage;
                         pPriceArray[i] = myProductPrice;
@@ -136,6 +140,7 @@ public class ProductListFragment extends Fragment implements ProductListAdaptor.
         bundle.putString("key222",pImageArray[position]);
         bundle.putString("key333",pPriceArray[position]);
         bundle.putString("key444",pDescriptionArray[position]);
+        bundle.putString("key555",pIdArray[position]);
         productDetailFragment.setArguments(bundle);
 
         getFragmentManager().beginTransaction().
