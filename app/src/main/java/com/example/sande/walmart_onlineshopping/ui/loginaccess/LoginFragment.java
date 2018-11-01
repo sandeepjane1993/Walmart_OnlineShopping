@@ -1,4 +1,4 @@
-package com.example.sande.walmart_onlineshopping.ui;
+package com.example.sande.walmart_onlineshopping.ui.loginaccess;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -20,6 +20,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.sande.walmart_onlineshopping.R;
+import com.example.sande.walmart_onlineshopping.ui.products.HomePageActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;

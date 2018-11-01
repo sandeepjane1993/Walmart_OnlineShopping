@@ -5,6 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/id_CartActivity"
-    tools:context=".ui.CartActivity">
+    tools:context=".ui.cart.CartActivity">
 
 </android.support.constraint.ConstraintLayout>

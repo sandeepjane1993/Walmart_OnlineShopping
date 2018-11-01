@@ -1,8 +1,6 @@
-package com.example.sande.walmart_onlineshopping.ui;
+package com.example.sande.walmart_onlineshopping.ui.cart;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,17 +8,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.sande.walmart_onlineshopping.FeedDao;
+import com.example.sande.walmart_onlineshopping.database.FeedDao;
 import com.example.sande.walmart_onlineshopping.R;
 import com.example.sande.walmart_onlineshopping.adapters.CartAdapter;
-import com.example.sande.walmart_onlineshopping.adapters.HomePageAdaptor;
-import com.example.sande.walmart_onlineshopping.data.HomeDepartmentData;
 import com.example.sande.walmart_onlineshopping.data.OrderData;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +23,7 @@ public class CartFragment extends Fragment {
     CartAdapter adapter;
     RecyclerView recyclerView;
     FeedDao feedDao;
-    TextView tv_subtotal, tv_taxes, tv_EstTotal;
+    TextView tv_subtotal, tv_taxes, tv_EstTotal,tv_topTotal;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -39,6 +32,7 @@ public class CartFragment extends Fragment {
         tv_subtotal = view.findViewById(R.id.tv_subtotal_cart);
         tv_taxes = view.findViewById(R.id.tv_taxes_cart);
         tv_EstTotal = view.findViewById(R.id.tv_EstTotal_Cart);
+        tv_topTotal = view.findViewById(R.id.tv_topTotal);
 
         myList = new ArrayList<>();
         feedDao = new FeedDao(getActivity());
@@ -67,7 +61,7 @@ public class CartFragment extends Fragment {
         tv_subtotal.setText("$" + subtotal);
         tv_taxes.setText("$" + taxes);
         tv_EstTotal.setText("$" + estTotal);
-
+        tv_topTotal.setText("Est Total    $" + estTotal);
 
     }
 }

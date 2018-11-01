@@ -1,4 +1,4 @@
-package com.example.sande.walmart_onlineshopping.ui;
+package com.example.sande.walmart_onlineshopping.ui.products;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,6 +30,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.sande.walmart_onlineshopping.adapters.HomePageAdaptor;
 import com.example.sande.walmart_onlineshopping.R;
 import com.example.sande.walmart_onlineshopping.data.HomeDepartmentData;
+import com.example.sande.walmart_onlineshopping.ui.cart.CartActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;

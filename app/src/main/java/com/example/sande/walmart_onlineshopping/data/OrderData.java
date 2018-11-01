@@ -2,6 +2,7 @@ package com.example.sande.walmart_onlineshopping.data;
 
 public class OrderData {
 
+
     private String pid;
     private String pname;
     private int quantity;

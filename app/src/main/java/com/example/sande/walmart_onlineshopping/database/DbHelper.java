@@ -1,9 +1,9 @@
-package com.example.sande.walmart_onlineshopping;
+package com.example.sande.walmart_onlineshopping.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import com.example.sande.walmart_onlineshopping.DbContract.*;
+import com.example.sande.walmart_onlineshopping.database.DbContract.*;
 
 public class DbHelper extends SQLiteOpenHelper {
 

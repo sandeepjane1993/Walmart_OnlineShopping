@@ -5,10 +5,28 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="8dp" />
+        <TextView
+            android:id="@+id/tv_topTotal"
+            android:layout_gravity="center"
+            android:text="Est total  $48.70"
+            android:textSize="25sp"
+            android:textColor="#0c7308"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="16dp"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerView_Cart"
@@ -48,6 +66,7 @@
                     android:paddingTop="10dp"
                     android:gravity="right"
                     android:text="$0.00"
+                    android:textStyle="bold"
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
@@ -70,7 +89,8 @@
                     android:paddingRight="10dp"
                     android:paddingTop="10dp"
                     android:gravity="right"
-                    android:text="$0.00"
+                    android:text="Free"
+                    android:textStyle="bold"
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
@@ -95,6 +115,7 @@
                     android:paddingTop="10dp"
                     android:gravity="right"
                     android:text="$0.00"
+                    android:textStyle="bold"
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
@@ -119,6 +140,8 @@
                     android:paddingTop="10dp"
                     android:gravity="right"
                     android:text="$0.00"
+                    android:textStyle="bold"
+                    android:textColor="#0f0f0f"
                     android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />

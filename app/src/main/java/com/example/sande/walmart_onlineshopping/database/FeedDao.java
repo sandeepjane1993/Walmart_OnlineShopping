@@ -1,4 +1,4 @@
-package com.example.sande.walmart_onlineshopping;
+package com.example.sande.walmart_onlineshopping.database;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.sande.walmart_onlineshopping.data.OrderData;
+import com.example.sande.walmart_onlineshopping.database.DbContract;
+import com.example.sande.walmart_onlineshopping.database.DbHelper;
 
 import java.util.ArrayList;
 import java.util.List;

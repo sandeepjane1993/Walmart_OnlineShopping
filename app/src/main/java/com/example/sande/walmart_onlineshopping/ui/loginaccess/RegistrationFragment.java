@@ -1,4 +1,4 @@
-package com.example.sande.walmart_onlineshopping.ui;
+package com.example.sande.walmart_onlineshopping.ui.loginaccess;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -17,7 +17,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.sande.walmart_onlineshopping.R;
-import com.example.sande.walmart_onlineshopping.ui.LoginFragment;
+import com.example.sande.walmart_onlineshopping.ui.loginaccess.LoginFragment;
 
 import java.util.HashMap;
 import java.util.Map;

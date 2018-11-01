@@ -5,6 +5,6 @@
     android:id="@+id/id_ProductBaseActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.ProductBaseActivity">
+    tools:context=".ui.products.ProductBaseActivity">
 
 </android.support.constraint.ConstraintLayout>

@@ -1,4 +1,4 @@
-package com.example.sande.walmart_onlineshopping.ui;
+package com.example.sande.walmart_onlineshopping.ui.cart;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

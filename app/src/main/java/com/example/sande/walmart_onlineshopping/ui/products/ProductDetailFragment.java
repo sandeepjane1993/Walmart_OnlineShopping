@@ -1,8 +1,6 @@
-package com.example.sande.walmart_onlineshopping.ui;
+package com.example.sande.walmart_onlineshopping.ui.products;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,9 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.sande.walmart_onlineshopping.FeedDao;
+import com.example.sande.walmart_onlineshopping.database.FeedDao;
 import com.example.sande.walmart_onlineshopping.R;
-import com.example.sande.walmart_onlineshopping.data.OrderData;
 import com.squareup.picasso.Picasso;
 
 public class ProductDetailFragment extends Fragment {

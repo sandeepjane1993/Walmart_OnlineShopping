@@ -1,4 +1,4 @@
-package com.example.sande.walmart_onlineshopping;
+package com.example.sande.walmart_onlineshopping.database;
 
 import android.provider.BaseColumns;
 
