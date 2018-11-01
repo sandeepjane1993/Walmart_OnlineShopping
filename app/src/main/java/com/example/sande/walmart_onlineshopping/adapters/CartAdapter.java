@@ -82,5 +82,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder>{
             btn_add_cart = itemView.findViewById(R.id.btn_add_cart);
 
         }
+
     }
 }

@@ -43,6 +43,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
+                    android:id="@+id/tv_subtotal_cart"
                     android:paddingRight="10dp"
                     android:paddingTop="10dp"
                     android:gravity="right"
@@ -89,6 +90,7 @@
                     android:paddingTop="10dp"
                     android:text="Est.Taxes,fees" />
                 <TextView
+                    android:id="@+id/tv_taxes_cart"
                     android:paddingRight="10dp"
                     android:paddingTop="10dp"
                     android:gravity="right"
@@ -112,7 +114,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
-                    android:id="@+id/tv_total_Cart"
+                    android:id="@+id/tv_EstTotal_Cart"
                     android:paddingRight="10dp"
                     android:paddingTop="10dp"
                     android:gravity="right"

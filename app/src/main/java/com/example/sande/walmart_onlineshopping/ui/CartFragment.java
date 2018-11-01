@@ -30,26 +30,44 @@ public class CartFragment extends Fragment {
     CartAdapter adapter;
     RecyclerView recyclerView;
     FeedDao feedDao;
+    TextView tv_subtotal, tv_taxes, tv_EstTotal;
 
-
-    Button btn_add_cart;
     @Override
-    public View onCreateView(LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_cart,container,false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_cart, container, false);
+
+        tv_subtotal = view.findViewById(R.id.tv_subtotal_cart);
+        tv_taxes = view.findViewById(R.id.tv_taxes_cart);
+        tv_EstTotal = view.findViewById(R.id.tv_EstTotal_Cart);
 
         myList = new ArrayList<>();
         feedDao = new FeedDao(getActivity());
         feedDao.openDb();
         recyclerView = view.findViewById(R.id.recyclerView_Cart);
         myList = feedDao.getToCart();
-     //   Toast.makeText(getActivity(), "" + myList.get(0).getPname() + myList.get(1).getPname(), Toast.LENGTH_SHORT).show();
-        adapter = new CartAdapter(myList,getActivity());
+        //   Toast.makeText(getActivity(), "" + myList.get(0).getPname() + myList.get(1).getPname(), Toast.LENGTH_SHORT).show();
+        adapter = new CartAdapter(myList, getActivity());
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
 
-        btn_add_cart = view.findViewById(R.id.btn_add_cart);
+        displayTotal();
         return view;
+    }
+
+    public void displayTotal() {
+        int subtotal = 0;
+        for (int i = 0; i < myList.size(); i++) {
+            subtotal = subtotal + (Integer.parseInt(myList.get(i).getPrize()) * myList.get(i).getQuantity());
+        }
+
+        int taxes = (int) (subtotal * 0.08);
+        int estTotal = subtotal + taxes;
+        tv_subtotal.setText("$" + subtotal);
+        tv_taxes.setText("$" + taxes);
+        tv_EstTotal.setText("$" + estTotal);
+
+
     }
 }
