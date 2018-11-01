@@ -21,6 +21,9 @@ public class FeedDao {
     public void openDb(){
         db = dbhelper.getWritableDatabase();
     }
+    public void readDb(){
+        db = dbhelper.getReadableDatabase();
+    }
     public void closeDb()
     {
         db.close();
@@ -49,16 +52,27 @@ public class FeedDao {
             do {
                 {
                     OrderData orderData = new OrderData();
-                    orderData.setPid(cursor.getString(1));
-                    orderData.setPname(cursor.getString(2));
-                    orderData.setQuantity(cursor.getInt(3));
-                    orderData.setPrize(cursor.getString(4));
-                    orderData.setImage(cursor.getString(5));
+                    orderData.setPid(cursor.getString(2));
+                    orderData.setPname(cursor.getString(3));
+                    orderData.setQuantity(cursor.getInt(4));
+                    orderData.setPrize(cursor.getString(5));
+                    orderData.setImage(cursor.getString(6));
                     list.add(orderData);
                 }
             }while (cursor.moveToNext());
         }
         cursor.close();
         return  list;
+    }
+
+    public int checkCart(String pid, String mobile)
+    {
+        int quantity = 0;
+        String sql = "SELECT quantity FROM " + DbContract.FeedEntry.TABLE_NAME + " WHERE pid =" + "\"" + pid + "\"" + "AND mobile =" + " " + mobile + " ";
+        //String sql = "SELECT quantity FROM " + cartTable + " WHERE pid =" + " " + id + " " + "AND mobile =" + " " + mobile + " ";
+        Cursor c = db.rawQuery(sql,null);
+        c.moveToLast();
+        quantity = c.getInt(0);
+        return quantity;
     }
 }

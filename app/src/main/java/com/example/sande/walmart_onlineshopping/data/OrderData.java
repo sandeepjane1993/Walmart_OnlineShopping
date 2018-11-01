@@ -12,6 +12,8 @@ public class OrderData {
     {
 
     }
+
+
     public OrderData(String pid, String pname, int quantity, String prize, String image) {
         this.pid = pid;
         this.pname = pname;

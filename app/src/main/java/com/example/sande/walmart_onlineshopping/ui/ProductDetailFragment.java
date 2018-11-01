@@ -59,8 +59,17 @@ public class ProductDetailFragment extends Fragment {
                 String pDescription = b.getString("key444");
                 String pId = b.getString("key555");
 
-                feedDao.addToCart("1",pId,pName,1,pPrice,pImage);
-                Toast.makeText(getActivity(), "Item has been added to your cart", Toast.LENGTH_SHORT).show();
+                int quantity = feedDao.checkCart(pId,"1");
+                if(quantity>=1)
+                {
+                    feedDao.addToCart("1",pId,pName,quantity+1,pPrice,pImage);
+                    Toast.makeText(getActivity(), "Item has been added to your cart", Toast.LENGTH_SHORT).show();
+                }
+                else
+                    {
+                    feedDao.addToCart("1", pId, pName, 1, pPrice, pImage);
+                    Toast.makeText(getActivity(), "Item has been added to your cart", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
