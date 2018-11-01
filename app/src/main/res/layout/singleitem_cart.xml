@@ -94,6 +94,7 @@
             android:layout_width="5dp"
             android:layout_height="match_parent"/>
         <Button
+            android:id="@+id/btn_add_cart"
             android:text="add"
             android:background="@drawable/button_viewdepartment"
             android:layout_width="50dp"
@@ -103,7 +104,7 @@
             android:layout_height="match_parent"/>
 
         <TextView
-
+            android:id="@+id/tv_remove_cart"
             android:text="Remove"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

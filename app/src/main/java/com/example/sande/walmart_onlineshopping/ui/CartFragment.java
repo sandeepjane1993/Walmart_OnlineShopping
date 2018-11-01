@@ -10,6 +10,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sande.walmart_onlineshopping.FeedDao;
@@ -29,6 +31,8 @@ public class CartFragment extends Fragment {
     RecyclerView recyclerView;
     FeedDao feedDao;
 
+
+    Button btn_add_cart;
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_cart,container,false);
@@ -38,14 +42,14 @@ public class CartFragment extends Fragment {
         feedDao.openDb();
         recyclerView = view.findViewById(R.id.recyclerView_Cart);
         myList = feedDao.getToCart();
-        Toast.makeText(getActivity(), "" + myList.get(0).getPname() + myList.get(1).getPname(), Toast.LENGTH_SHORT).show();
+     //   Toast.makeText(getActivity(), "" + myList.get(0).getPname() + myList.get(1).getPname(), Toast.LENGTH_SHORT).show();
         adapter = new CartAdapter(myList,getActivity());
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
 
-
+        btn_add_cart = view.findViewById(R.id.btn_add_cart);
         return view;
     }
 }

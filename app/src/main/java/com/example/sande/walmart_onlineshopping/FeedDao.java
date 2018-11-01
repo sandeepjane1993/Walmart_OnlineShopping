@@ -67,12 +67,23 @@ public class FeedDao {
 
     public int checkCart(String pid, String mobile)
     {
-        int quantity = 0;
+        int quantity = -1;
         String sql = "SELECT quantity FROM " + DbContract.FeedEntry.TABLE_NAME + " WHERE pid =" + "\"" + pid + "\"" + "AND mobile =" + " " + mobile + " ";
-        //String sql = "SELECT quantity FROM " + cartTable + " WHERE pid =" + " " + id + " " + "AND mobile =" + " " + mobile + " ";
         Cursor c = db.rawQuery(sql,null);
-        c.moveToLast();
-        quantity = c.getInt(0);
+        for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()) {
+            quantity = c.getInt(0);
+        }
         return quantity;
+    }
+
+    public void updateCartQuantity(int newQuantity, String pid, String mobile){
+        String sql = "UPDATE " + DbContract.FeedEntry.TABLE_NAME + " "
+                + "SET quantity =" + "\"" + newQuantity + "\"" + "WHERE pid=" + "\"" + pid + "\"" + "AND mobile =" + "\"" + mobile + "\"";
+        db.execSQL(sql);
+    }
+
+    public void deleteItemCart(String mobile, String pid){
+        String sql = "DELETE FROM " + DbContract.FeedEntry.TABLE_NAME + " WHERE mobile=" +  "\"" + mobile + "\"" + "AND pid =" + "\"" + pid + "\"";
+        db.execSQL(sql);
     }
 }
