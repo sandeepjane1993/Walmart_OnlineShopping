@@ -24,7 +24,10 @@
             android:label="@string/title_activity_home_page"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ui.products.ProductBaseActivity" />
-        <activity android:name=".ui.cart.CartActivity"></activity>
+        <activity android:name=".ui.cart.CartActivity" />
+        <activity android:name=".CheckoutActivity" />
+        <activity android:name=".OrderSummary" />
+        <activity android:name=".AccountBaseActivity"></activity>
     </application>
 
 </manifest>

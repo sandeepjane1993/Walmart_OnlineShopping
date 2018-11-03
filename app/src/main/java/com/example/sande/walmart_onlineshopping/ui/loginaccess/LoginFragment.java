@@ -71,15 +71,26 @@ public class LoginFragment extends Fragment {
                             JSONObject mydata = jsonArray.getJSONObject(0);
 
                             String mymsg = mydata.getString("msg");
-                            String myApiKey = mydata.getString("appapikey ");
                             String id = mydata.getString("id");
+                            String myFirstName =  mydata.getString("firstname");
+                            String myLastName =  mydata.getString("lastname");
+                            String myEmail =  mydata.getString("email");
+                            String myMobile =  mydata.getString("mobile");
+                            String myApiKey = mydata.getString("appapikey ");
+
+
 
                                 if (mymsg.equals("success"))
                                 {
 
                                     Intent intent = new Intent(getContext(),HomePageActivity.class);
-                                    intent.putExtra("API key",myApiKey);
                                     intent.putExtra("user_id",id);
+                                    intent.putExtra("fName",myFirstName);
+                                    intent.putExtra("lName",myLastName);
+                                    intent.putExtra("email",myEmail);
+                                    intent.putExtra("mobile",myMobile);
+                                    intent.putExtra("API key",myApiKey);
+
                                     startActivity(intent);
 
                                 }
@@ -105,12 +116,12 @@ public class LoginFragment extends Fragment {
                     protected Map<String, String> getParams() {
                         Map<String, String> params = new HashMap<String, String>();
                         Log.i("wheeee", "getParams: hooooooooooooooooooooooooooooooooooo");
-                         String mob = editText_mobile.getText().toString();
+
+                        String mob = editText_mobile.getText().toString();
                          String pass = editText_password.getText().toString();
 
                         params.put("mobile", mob);
                         params.put("password", pass);
-
                         return params;
                     }
 

@@ -27,6 +27,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.sande.walmart_onlineshopping.AccountBaseActivity;
 import com.example.sande.walmart_onlineshopping.adapters.HomePageAdaptor;
 import com.example.sande.walmart_onlineshopping.R;
 import com.example.sande.walmart_onlineshopping.data.HomeDepartmentData;
@@ -53,6 +54,7 @@ public class HomePageActivity extends AppCompatActivity
     HomePageAdaptor adapter;
     RecyclerView recyclerView;
     ViewFlipper flipper;
+    String[] cidArray;
     String url2 ="http://rjtmobile.com/ansari/shopingcart/androidapp/cust_category.php";
 
 
@@ -62,15 +64,18 @@ public class HomePageActivity extends AppCompatActivity
                 public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                     switch (menuItem.getItemId()) {
                         case R.id.navigation_home:
-                            Toast.makeText(HomePageActivity.this, "home", Toast.LENGTH_SHORT).show();
                             return true;
-                        case R.id.navigation_dashboard:
-                            Toast.makeText(HomePageActivity.this, "cart", Toast.LENGTH_SHORT).show();
-                            Intent i = new Intent(HomePageActivity.this,CartActivity.class);
-                            startActivity(i);
+                        case R.id.navigation_cart:
+                            Intent cart = new Intent(HomePageActivity.this,CartActivity.class);
+                            startActivity(cart);
                             return true;
-                        case R.id.navigation_notifications:
-                            Toast.makeText(HomePageActivity.this, "account update", Toast.LENGTH_SHORT).show();
+                        case R.id.navigation_Account:
+
+                            Intent account = new Intent(HomePageActivity.this,AccountBaseActivity.class);
+                            account.putExtra("apiKey",getIntent().getStringExtra("API key"));
+                            account.putExtra("userId",getIntent().getStringExtra("user_id"));
+                            account.putExtra("mobile",getIntent().getStringExtra("mobile"));
+                            startActivity(account);
                             return true;
                     }
                     return false;
@@ -123,6 +128,7 @@ public class HomePageActivity extends AppCompatActivity
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     JSONArray jsonArray = jsonObject.getJSONArray("category");
+                    cidArray = new String[jsonArray.length()];
                     for(int i=0;i< jsonArray.length();i++)
                     {
                         JSONObject mydata = jsonArray.getJSONObject(i);
@@ -130,6 +136,8 @@ public class HomePageActivity extends AppCompatActivity
                         String myName = mydata.getString("cname");
                         String myImage = mydata.getString("cimagerl");
                         String myDescription = mydata.getString("cdiscription");
+
+                        cidArray[i] = myId;
 
                         HomeDepartmentData data = new HomeDepartmentData(myImage,myName);
                         myList.add(data);
@@ -242,18 +250,22 @@ public class HomePageActivity extends AppCompatActivity
     @Override
     public void itemClicked(View view, int position) {
 
-       // getSupportFragmentManager().beginTransaction().replace
-                //(R.id.id_HomePageActivity,new SubDepartmentFragment()).addToBackStack("null").commit();
-
-        String[] array = {"107","108","109","111","112","113","114","115"};
-        String cid = array[position];
-        String myApiKey = getIntent().getStringExtra("API key");
         String myUserId = getIntent().getStringExtra("user_id");
+        String myfName = getIntent().getStringExtra("fName");
+        String mylName = getIntent().getStringExtra("lName");
+        String myEmail = getIntent().getStringExtra("email");
+        String myMobile = getIntent().getStringExtra("mobile");
+        String myApiKey = getIntent().getStringExtra("API key");
+
         Intent i = new Intent(HomePageActivity.this,ProductBaseActivity.class);
-        i.putExtra("key1",cid);
-        i.putExtra("key2",myApiKey);
-        i.putExtra("key3",myUserId);
-        Log.i(TAG, "itemClicked: cid = " + cid + "api = "+ myApiKey+"user_id = "+ myUserId);
+        i.putExtra("key_cid",cidArray[position]);
+        i.putExtra("key_userId",myUserId);
+        i.putExtra("key_fName",myfName);
+        i.putExtra("key_lName",mylName);
+        i.putExtra("key_email",myEmail);
+        i.putExtra("key_mobile",myMobile);
+        i.putExtra("key_apiKey",myApiKey);
+
         startActivity(i);
     }
 

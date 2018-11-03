@@ -1,15 +1,19 @@
 package com.example.sande.walmart_onlineshopping.ui.cart;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.sande.walmart_onlineshopping.CheckoutActivity;
 import com.example.sande.walmart_onlineshopping.database.FeedDao;
 import com.example.sande.walmart_onlineshopping.R;
 import com.example.sande.walmart_onlineshopping.adapters.CartAdapter;
@@ -24,6 +28,7 @@ public class CartFragment extends Fragment {
     RecyclerView recyclerView;
     FeedDao feedDao;
     TextView tv_subtotal, tv_taxes, tv_EstTotal,tv_topTotal;
+    Button btn_proceedToCheckout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -33,6 +38,7 @@ public class CartFragment extends Fragment {
         tv_taxes = view.findViewById(R.id.tv_taxes_cart);
         tv_EstTotal = view.findViewById(R.id.tv_EstTotal_Cart);
         tv_topTotal = view.findViewById(R.id.tv_topTotal);
+        btn_proceedToCheckout = view.findViewById(R.id.btn_proceedToCheckout_Cart);
 
         myList = new ArrayList<>();
         feedDao = new FeedDao(getActivity());
@@ -47,6 +53,28 @@ public class CartFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         displayTotal();
+        btn_proceedToCheckout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Bundle b = getArguments();
+                String userId =   b.getString("userId");
+                String fName =   b.getString("fName");
+                String email =   b.getString("email");
+                String mobile =   b.getString("mobile");
+                String apiKey =   b.getString("apiKey");
+
+                Log.i("cartFrag", "User Id in Card Frag" + userId + "  " + apiKey);
+                Intent i = new Intent(getActivity(),CheckoutActivity.class);
+                i.putExtra("userId",userId);
+                i.putExtra("fName",fName);
+                i.putExtra("email",email);
+                i.putExtra("mobile",mobile);
+                i.putExtra("apiKey",apiKey);
+                Log.i("cartFrag", "User Id in Card Frag" + mobile + "  " + email);
+                startActivity(i);
+            }
+        });
         return view;
     }
 

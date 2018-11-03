@@ -15,16 +15,28 @@ public class ProductBaseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_product_base);
 
 
-        String cid = getIntent().getStringExtra("key1");
-        String apiKey = getIntent().getStringExtra("key2");
-        String userId = getIntent().getStringExtra("key3");
+        String myCid = getIntent().getStringExtra("key_cid");
+        String myUserId = getIntent().getStringExtra("key_userId");
+        String myfName = getIntent().getStringExtra("key_fName");
+        String mylName = getIntent().getStringExtra("key_lName");
+        String myEmail = getIntent().getStringExtra("key_email");
+        String myMobile = getIntent().getStringExtra("key_mobile");
+        String myApiKey = getIntent().getStringExtra("key_apiKey");
+
 
         SubDepartmentFragment subDepartmentFragment = new SubDepartmentFragment();
+
         Bundle bundle = new Bundle();
-        bundle.putString("key1",cid);
-        bundle.putString("key2",apiKey);
-        bundle.putString("key3",userId);
-        Log.i(TAG, "on received: cid = " + cid + "api = "+ apiKey+"usere_id = "+ userId);
+        bundle.putString("key1_cid",myCid);
+        bundle.putString("key1_userId",myUserId);
+        bundle.putString("key1_fName",myfName);
+        bundle.putString("key1_lName",mylName);
+        bundle.putString("key1_email",myEmail);
+        bundle.putString("key1_mobile",myMobile);
+        bundle.putString("key1_apiKey",myApiKey);
+
+        Log.i(TAG, "onCreate: cid = " + myCid +"userId " + myUserId + " api : " + myApiKey );
+
         subDepartmentFragment.setArguments(bundle);
 
 

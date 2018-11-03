@@ -143,6 +143,18 @@
             android:paddingLeft="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"/>
+        <Button
+            android:layout_gravity="center"
+            android:text="Go to Cart"
+            android:textAllCaps="false"
+            android:id="@+id/btn_goToCart"
+            android:background="@drawable/button_curved"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp" />
     </LinearLayout>
+
 
 </ScrollView>

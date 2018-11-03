@@ -97,9 +97,9 @@ public class SubDepartmentFragment extends Fragment implements HomePageAdaptor.C
                 Log.i("wheeee", "getParams: hooooooooooooooooooooooooooooooooooo");
 
                 Bundle b = getArguments();
-                String cid =   b.getString("key1");
-                String apiKey =   b.getString("key2");
-                String userId =   b.getString("key3");
+                String cid =   b.getString("key1_cid");
+                String apiKey =   b.getString("key1_apiKey");
+                String userId =   b.getString("key1_userId");
 
                 Log.i(TAG, "in fragment: cid = " + cid + "api = "+ apiKey+"usere_id = "+ userId);
                 params.put("Id",cid);
@@ -120,17 +120,26 @@ public class SubDepartmentFragment extends Fragment implements HomePageAdaptor.C
     @Override
     public void itemClicked(View view, int position) {
         Bundle b = getArguments();
-        String cid =   b.getString("key1");
-        String apiKey =   b.getString("key2");
-        String userId =   b.getString("key3");
+        String cid =   b.getString("key1_cid");
+        String userId =   b.getString("key1_userId");
+        String fName =   b.getString("key1_fName");
+        String lName =   b.getString("key1_lName");
+        String email =   b.getString("key1_email");
+        String mobile =   b.getString("key1_mobile");
+        String apiKey =   b.getString("key1_apiKey");
+
 
         ProductListFragment productListFragment = new ProductListFragment();
         Bundle bundle = new Bundle();
-        bundle.putString("key11",cid);
-        bundle.putString("key22",scid[position]);
-        bundle.putString("key33",apiKey);
-        bundle.putString("key44",userId);
-        Log.i(TAG, "final scid: " + scid[position]);
+        bundle.putString("key2_cid",cid);
+        bundle.putString("key2_scid",scid[position]);
+        bundle.putString("key2_userId",userId);
+        bundle.putString("key2_fName",fName);
+        bundle.putString("key2_lName",lName);
+        bundle.putString("key2_email",email);
+        bundle.putString("key2_mobile",mobile);
+        bundle.putString("key2_apiKey",apiKey);
+
         productListFragment.setArguments(bundle);
 
         getFragmentManager().beginTransaction().replace(R.id.id_ProductBaseActivity,productListFragment).addToBackStack("null").commit();

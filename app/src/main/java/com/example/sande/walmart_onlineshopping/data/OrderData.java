@@ -2,7 +2,7 @@ package com.example.sande.walmart_onlineshopping.data;
 
 public class OrderData {
 
-
+    private String mobile;
     private String pid;
     private String pname;
     private int quantity;
@@ -15,12 +15,21 @@ public class OrderData {
     }
 
 
-    public OrderData(String pid, String pname, int quantity, String prize, String image) {
+    public OrderData(String mobile, String pid, String pname, int quantity, String prize, String image) {
+        this.mobile = mobile;
         this.pid = pid;
         this.pname = pname;
         this.quantity = quantity;
         this.prize = prize;
         this.image = image;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 
     public String getPid() {

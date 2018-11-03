@@ -107,15 +107,15 @@ public class ProductListFragment extends Fragment implements ProductListAdaptor.
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
-                Log.i("wheeee", "getParams: hooooooooooooooooooooooooooooooooooo");
+                Log.i("passdata", "getParams: hooooooooooooooooooooooooooooooooooo");
 
                 Bundle b = getArguments();
-                String cid =   b.getString("key11");
-                String scid =   b.getString("key22");
-                String apiKey =   b.getString("key33");
-                String userId =   b.getString("key44");
+                String cid =   b.getString("key2_cid");
+                String scid =   b.getString("key2_scid");
+                String apiKey =   b.getString("key2_apiKey");
+                String userId =   b.getString("key2_userId");
 
-                //Log.i(TAG, "in fragment: cid = " + cid + "api = "+ apiKey+"usere_id = "+ userId);
+                Log.i("passdata", "in fragment pl: cid = " + cid + "api = "+ apiKey+"usere_id = "+ userId);
                 params.put("cid",cid);
                 params.put("scid",scid);
                 params.put("api_key", apiKey);
@@ -134,6 +134,16 @@ public class ProductListFragment extends Fragment implements ProductListAdaptor.
     @Override
     public void itemClicked(View view, int position) {
 
+
+        Bundle b = getArguments();
+        String cid =   b.getString("key2_cid");
+        String userId =   b.getString("key2_userId");
+        String fName =   b.getString("key2_fName");
+        String lName =   b.getString("key2_lName");
+        String email =   b.getString("key2_email");
+        String mobile =   b.getString("key2_mobile");
+        String apiKey =   b.getString("key2_apiKey");
+
         ProductDetailFragment productDetailFragment = new ProductDetailFragment();
         Bundle bundle = new Bundle();
         bundle.putString("key111",pNameArray[position]);
@@ -141,6 +151,13 @@ public class ProductListFragment extends Fragment implements ProductListAdaptor.
         bundle.putString("key333",pPriceArray[position]);
         bundle.putString("key444",pDescriptionArray[position]);
         bundle.putString("key555",pIdArray[position]);
+        bundle.putString("key3_userId",userId);
+        bundle.putString("key3_fName",fName);
+        bundle.putString("key3_lName",lName);
+        bundle.putString("key3_email",email);
+        bundle.putString("key3_mobile",mobile);
+        bundle.putString("key3_apiKey",apiKey);
+
         productDetailFragment.setArguments(bundle);
 
         getFragmentManager().beginTransaction().
