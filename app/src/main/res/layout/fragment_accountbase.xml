@@ -120,7 +120,8 @@
         android:background="#d1d4d1"
         android:layout_height="1dp"/>
     <Button
-        android:text="Walmart Associates"
+        android:id="@+id/btn_topSellers"
+        android:text="Top Sellers"
         android:textAlignment="textStart"
         android:drawableRight="@drawable/ic_chevron_right_black_24dp"
         android:drawableLeft="@drawable/ic_person_outline_black_24dp"
@@ -174,6 +175,7 @@
         android:layout_width="match_parent"
         android:layout_height="5dp"/>
     <Button
+        android:id="@+id/btn_signOut"
         android:layout_gravity="center"
         android:text="Sign Out"
         android:textAllCaps="false"

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="15dp"/>
+
+        <ImageView
+            android:id="@+id/iv_singleitem_TS"
+            android:src="@drawable/pic_vf_clothing"
+            android:layout_width="match_parent"
+            android:layout_height="150dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"/>
+
+    <TextView
+        android:id="@+id/tv_sellerName_TS"
+        android:text="Samsung"
+        android:textSize="25sp"
+        android:textColor="#0f0f0f"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"/>
+
+    <TextView
+        android:id="@+id/tv_sellerDeals_TS"
+        android:text="Best Selling products: "
+        android:textSize="18sp"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"/>
+    <RatingBar
+        android:id="@+id/ratingBar_TS"
+        android:rating="3.5"
+        android:layout_gravity="center"
+        android:progressTint="#edd307"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"/>
+    <View
+        android:background="#0f0f0f"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"/>
+</LinearLayout>
