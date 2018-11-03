@@ -35,7 +35,7 @@ public class AccountFragment extends Fragment {
                 bundle.putString("mobile",mobile);
                 purchaseHistoryFragment.setArguments(bundle);
 
-                getFragmentManager().beginTransaction().replace(R.id.id_AccountBaseActivity, purchaseHistoryFragment).commit();
+                getFragmentManager().beginTransaction().replace(R.id.id_AccountBaseActivity, purchaseHistoryFragment).addToBackStack("null").commit();
             }
         });
         return  view;

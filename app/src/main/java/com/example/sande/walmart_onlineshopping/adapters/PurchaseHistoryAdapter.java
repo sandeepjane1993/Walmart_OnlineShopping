@@ -15,6 +15,7 @@ import java.util.List;
 
 public class PurchaseHistoryAdapter extends RecyclerView.Adapter<PurchaseHistoryAdapter.ViewHolder> {
 
+    private ClickListener clickListener;
     List<PurchaseHistoryData> purchaseHistoryDataList;
     Context ctx;
 
@@ -48,18 +49,37 @@ public class PurchaseHistoryAdapter extends RecyclerView.Adapter<PurchaseHistory
                 "Date & Time : " + data.getPlacedOn());
     }
 
+    public void setClickListener(ClickListener clickListener) {
+        this.clickListener = clickListener;
+    }
+
     @Override
     public int getItemCount() {
         return purchaseHistoryDataList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+
+
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView tv_PurchaseHistory;
         public ViewHolder(View itemView) {
             super(itemView);
-
+            itemView.setOnClickListener(this);
             tv_PurchaseHistory = itemView.findViewById(R.id.tv_singleItem_PH);
         }
+
+        @Override
+        public void onClick(View v) {
+
+            if(clickListener != null)
+            {
+                clickListener.itemClicked(v,getAdapterPosition());
+            }
+        }
+    }
+    public interface ClickListener{
+
+        public void itemClicked(View view,int position);
     }
 }

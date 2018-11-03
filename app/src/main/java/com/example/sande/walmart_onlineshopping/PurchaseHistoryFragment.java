@@ -29,18 +29,20 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PurchaseHistoryFragment extends Fragment {
+public class PurchaseHistoryFragment extends Fragment implements PurchaseHistoryAdapter.ClickListener{
 
     private List<PurchaseHistoryData> myList;
     PurchaseHistoryAdapter adapter;
     RecyclerView recyclerView;
+    String[] orderIdArray;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_purchasehistory,container,false);
 
         myList = new ArrayList<>();
         recyclerView = view.findViewById(R.id.recyclerView_PurchaseHistory);
-        adapter = new PurchaseHistoryAdapter(myList,getActivity());
+        adapter = new PurchaseHistoryAdapter(myList,getContext());
+        adapter.setClickListener(this);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -61,11 +63,12 @@ public class PurchaseHistoryFragment extends Fragment {
             @Override
             public void onResponse(String response) {
 
-                Toast.makeText(getActivity(), "" + response, Toast.LENGTH_LONG).show();
+                //Toast.makeText(getActivity(), "" + response, Toast.LENGTH_LONG).show();
                 Log.i("checkResponse", "onResponse: " +response);
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     JSONArray jsonArray = jsonObject.getJSONArray("Order history");
+                    orderIdArray = new String[jsonArray.length()];
                     for(int i=0;i< jsonArray.length();i++)
                     {
                         JSONObject mydata = jsonArray.getJSONObject(i);
@@ -83,6 +86,7 @@ public class PurchaseHistoryFragment extends Fragment {
                         String paidPrice = mydata.getString("paidprice");
                         String placedOn = mydata.getString("placedon");
 
+                        orderIdArray[i] = orderId;
                         PurchaseHistoryData purchaseHistoryData = new PurchaseHistoryData(orderId,orderStatus,userName,billing,delivery,mobile,
                                 email,itemId,itemName,itemQty,totalPrice,paidPrice,placedOn);
                         myList.add(purchaseHistoryData);
@@ -109,5 +113,22 @@ public class PurchaseHistoryFragment extends Fragment {
         RequestQueue purchaseHistoryRequest = Volley.newRequestQueue(getActivity());
         purchaseHistoryRequest.add(request);
         return view;
+    }
+
+    @Override
+    public void itemClicked(View view, int position) {
+
+        Bundle b = getArguments();
+        String apiKey = b.getString("apiKey");
+        String userId = b.getString("userId");
+
+        OrderTrackFragment orderTrackFragment = new OrderTrackFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("apiKey",apiKey);
+        bundle.putString("userId",userId);
+        bundle.putString("orderId",orderIdArray[position]);
+        orderTrackFragment.setArguments(bundle);
+        getFragmentManager().beginTransaction().replace(R.id.id_AccountBaseActivity, orderTrackFragment).addToBackStack("null").commit();
+
     }
 }

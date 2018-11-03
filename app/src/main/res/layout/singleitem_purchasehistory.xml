@@ -14,4 +14,21 @@
         android:paddingLeft="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"/>
+    <Button
+        android:layout_gravity="center"
+        android:text="Track your order"
+        android:textColor="#fcfcfc"
+        android:background="@drawable/button_curved"
+        android:layout_width="160dp"
+        android:layout_height="40dp" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"/>
+    <View
+        android:background="#0f0f0f"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
 </LinearLayout>
