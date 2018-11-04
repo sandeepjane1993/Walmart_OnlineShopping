@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.sande.walmart_onlineshopping.CheckoutActivity;
+import com.example.sande.walmart_onlineshopping.ui.payment.CheckoutActivity;
 import com.example.sande.walmart_onlineshopping.database.FeedDao;
 import com.example.sande.walmart_onlineshopping.R;
 import com.example.sande.walmart_onlineshopping.adapters.CartAdapter;

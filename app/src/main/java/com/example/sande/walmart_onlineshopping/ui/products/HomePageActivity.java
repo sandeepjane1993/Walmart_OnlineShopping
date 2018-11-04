@@ -18,7 +18,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
-import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.android.volley.Request;
@@ -27,7 +26,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.sande.walmart_onlineshopping.AccountBaseActivity;
+import com.example.sande.walmart_onlineshopping.account.AccountBaseActivity;
 import com.example.sande.walmart_onlineshopping.adapters.HomePageAdaptor;
 import com.example.sande.walmart_onlineshopping.R;
 import com.example.sande.walmart_onlineshopping.data.HomeDepartmentData;
@@ -75,6 +74,9 @@ public class HomePageActivity extends AppCompatActivity
                             account.putExtra("apiKey",getIntent().getStringExtra("API key"));
                             account.putExtra("userId",getIntent().getStringExtra("user_id"));
                             account.putExtra("mobile",getIntent().getStringExtra("mobile"));
+                            account.putExtra("fName",getIntent().getStringExtra("fName"));
+                            account.putExtra("lName",getIntent().getStringExtra("lName"));
+                            account.putExtra("email",getIntent().getStringExtra("email"));
                             startActivity(account);
                             return true;
                     }

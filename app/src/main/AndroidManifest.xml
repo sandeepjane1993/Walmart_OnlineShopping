@@ -25,9 +25,9 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ui.products.ProductBaseActivity" />
         <activity android:name=".ui.cart.CartActivity" />
-        <activity android:name=".CheckoutActivity" />
-        <activity android:name=".OrderSummary" />
-        <activity android:name=".AccountBaseActivity"></activity>
+        <activity android:name=".ui.payment.CheckoutActivity" />
+        <activity android:name=".ui.payment.OrderSummary" />
+        <activity android:name=".account.AccountBaseActivity"></activity>
     </application>
 
 </manifest>

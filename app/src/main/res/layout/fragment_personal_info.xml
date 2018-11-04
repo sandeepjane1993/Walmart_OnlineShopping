@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
+    <TextView
+        android:textSize="25sp"
+        android:layout_gravity="center"
+        android:text="Personal Information"
+        android:textColor="#0f0f0f"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
+    <TextView
+        android:id="@+id/tv_PersonalInfo_PI"
+        android:textSize="15sp"
+        android:paddingLeft="15dp"
+        android:text="info"
+        android:textColor="#0f0f0f"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
+    <TextView
+        android:textAlignment="center"
+        android:text="Update your information below "
+        android:background="#dfdcdc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
+
+    <EditText
+        android:id="@+id/et_firstName_PI"
+        android:hint="first name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/et_lastName_PI"
+        android:hint="last name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/et_address_PI"
+        android:hint="address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/et_email_PI"
+        android:hint="email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="15dp"/>
+    <Button
+        android:id="@+id/btn_updateInfo_PI"
+        android:layout_gravity="center"
+        android:textColor="#FCFCFC"
+        android:text="Update Info"
+        android:textAllCaps="false"
+        android:background="@drawable/button_curved"
+        android:layout_width="160dp"
+        android:layout_height="40dp" />
+
+</LinearLayout>

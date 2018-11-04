@@ -1,4 +1,4 @@
-package com.example.sande.walmart_onlineshopping;
+package com.example.sande.walmart_onlineshopping.ui.payment;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.sande.walmart_onlineshopping.data.OrderData;
+import com.example.sande.walmart_onlineshopping.R;
 import com.paypal.android.sdk.payments.PayPalConfiguration;
 import com.paypal.android.sdk.payments.PayPalPayment;
 import com.paypal.android.sdk.payments.PayPalService;
