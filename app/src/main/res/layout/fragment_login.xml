@@ -11,6 +11,37 @@
         android:layout_width="match_parent"
         android:layout_height="320dp"
         android:background="#10026b">
+
+        <ImageView
+
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="149dp"
+            android:layout_marginBottom="116dp"
+            android:src="@drawable/user2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="72dp"
+            android:text="Sign In"
+            android:textColor="#FCFCFC"
+            android:textSize="25sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="40dp"
+            android:text="... for more ways to save money and time"
+            android:textColor="#FCFCFC" />
+
+
     </RelativeLayout>
 
     <View
@@ -48,9 +79,9 @@
 
 
         <TextView
-            android:text="New to Walmart?"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="New to Walmart?" />
 
         <TextView
             android:id="@+id/tv_createAccount"
@@ -70,12 +101,22 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
             android:layout_gravity="center"
-            android:layout_marginStart="136dp"
-            android:layout_marginBottom="18dp"
+            android:layout_marginStart="167dp"
+            android:layout_marginBottom="72dp"
             android:background="@drawable/button_curved"
             android:text="Sign In"
             android:textAllCaps="false"
             android:textColor="#f5f4f4" />
+
+
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/login_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/tv_createAccount"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="13dp"
+            android:layout_marginBottom="21dp" />
 
     </RelativeLayout>
 

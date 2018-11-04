@@ -10,4 +10,7 @@
     <string name="title_home">Home</string>
     <string name="title_cart">Cart</string>
     <string name="title_account">Account</string>
+    <string name="facebook_app_id">199622680932652</string>
+    <string name="fb_login_protocol_scheme">fb199622680932652</string>
+
 </resources>

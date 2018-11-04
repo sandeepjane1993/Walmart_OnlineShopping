@@ -50,51 +50,60 @@ public class RegistrationFragment extends Fragment {
 
                 dialog.show();
 
-                StringRequest request = new StringRequest(Request.Method.POST, url2, new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        dialog.dismiss();
-                        Toast.makeText(getActivity(), "" + response, Toast.LENGTH_SHORT).show();
-                        if(response.equals("successfully registered"))
-                        {
-                            getFragmentManager().beginTransaction().replace(R.id.id_loginActivity,new LoginFragment()).commit();
+                if (et_password.getText().toString().length() < 6) {
+                    dialog.dismiss();
+                    Toast.makeText(getActivity(), "Password is too short", Toast.LENGTH_SHORT).show();
+
+                } else if (et_mobile.getText().toString().length() < 10) {
+                    dialog.dismiss();
+                    Toast.makeText(getActivity(), "Mobile number should be 10 digits", Toast.LENGTH_SHORT).show();
+
+                } else {
+                    StringRequest request = new StringRequest(Request.Method.POST, url2, new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            dialog.dismiss();
+                            Toast.makeText(getActivity(), "" + response, Toast.LENGTH_SHORT).show();
+                            if (response.equals("successfully registered")) {
+                                getFragmentManager().beginTransaction().replace(R.id.id_loginActivity, new LoginFragment()).commit();
+                            }
+
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+
+                            dialog.dismiss();
+                            Toast.makeText(getActivity(), "" + error, Toast.LENGTH_SHORT).show();
+
+                        }
+                    }) {
+                        @Override
+                        protected Map<String, String> getParams() {
+                            Map<String, String> params = new HashMap<String, String>();
+
+                            String firstname = et_fname.getText().toString();
+                            String lastname = et_lname.getText().toString();
+                            String address = et_address.getText().toString();
+                            String email = et_email.getText().toString();
+                            String mobile = et_mobile.getText().toString();
+                            String password = et_password.getText().toString();
+
+                            params.put("fname", firstname);
+                            params.put("lname", lastname);
+                            params.put("address", address);
+                            params.put("email", email);
+                            params.put("mobile", mobile);
+                            params.put("password", password);
+
+                            return params;
                         }
 
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
+                    };
+                    RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
 
-                        dialog.dismiss();
-                        Toast.makeText(getActivity(), "" + error, Toast.LENGTH_SHORT).show();
-
-                    }
-                }) {
-                    @Override
-                    protected Map<String, String> getParams() {
-                        Map<String, String> params = new HashMap<String, String>();
-
-                       String firstname = et_fname.getText().toString();
-                        String lastname = et_lname.getText().toString();
-                        String address = et_address.getText().toString();
-                        String email = et_email.getText().toString();
-                        String mobile = et_mobile.getText().toString();
-                        String password = et_password.getText().toString();
-
-                        params.put("fname", firstname);
-                        params.put("lname", lastname);
-                        params.put("address", address);
-                        params.put("email", email);
-                        params.put("mobile", mobile);
-                        params.put("password", password);
-
-                        return params;
-                    }
-
-                };
-                RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-
-                requestQueue.add(request);
+                    requestQueue.add(request);
+                }
             }
         });
 

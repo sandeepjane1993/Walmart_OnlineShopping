@@ -73,6 +73,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder>{
             tv_remove_cart = itemView.findViewById(R.id.tv_remove_cart);
             btn_add_cart = itemView.findViewById(R.id.btn_add_cart);
 
+
+
+
             btn_add_cart.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

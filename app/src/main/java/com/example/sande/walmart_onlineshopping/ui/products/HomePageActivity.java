@@ -1,9 +1,14 @@
 package com.example.sande.walmart_onlineshopping.ui.products;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,6 +23,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.android.volley.Request;
@@ -41,6 +47,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 public class HomePageActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,HomePageAdaptor.ClickListener {
 
@@ -54,6 +61,7 @@ public class HomePageActivity extends AppCompatActivity
     RecyclerView recyclerView;
     ViewFlipper flipper;
     String[] cidArray;
+    CardView cardView;
     String url2 ="http://rjtmobile.com/ansari/shopingcart/androidapp/cust_category.php";
 
 
@@ -98,10 +106,13 @@ public class HomePageActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
+
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottomNavigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
 
+        cardView = findViewById(R.id.cardView_location);
         myList = new ArrayList<>();
         adapter = new HomePageAdaptor(myList,getApplicationContext());
         adapter.setClickListener(this);
@@ -124,6 +135,17 @@ public class HomePageActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
+        cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (ContextCompat.checkSelfPermission(HomePageActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(HomePageActivity.this, "Location enabled", Toast.LENGTH_SHORT).show();
+                } else {
+                    ActivityCompat.requestPermissions(HomePageActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 10);
+                }
+            }
+        });
 
         for (int i = 0; i < images.length; i++) {
             flipImage(images[i]);

@@ -48,6 +48,7 @@
         android:layout_height="1dp"/>
 
     <Button
+        android:id="@+id/btn_location"
         android:text="Your Location"
         android:textAlignment="textStart"
         android:drawableRight="@drawable/ic_chevron_right_black_24dp"

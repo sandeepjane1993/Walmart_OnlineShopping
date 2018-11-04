@@ -14,7 +14,7 @@ import com.example.sande.walmart_onlineshopping.ui.loginaccess.LoginActivity;
 
 public class AccountFragment extends Fragment {
 
-    Button btn_purchaseHistory, btn_topSellers, btn_signOut, btn_personalInfo, btn_resetPassword;
+    Button btn_purchaseHistory, btn_topSellers, btn_signOut, btn_personalInfo, btn_resetPassword,btn_location;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -26,6 +26,8 @@ public class AccountFragment extends Fragment {
         btn_topSellers = view.findViewById(R.id.btn_topSellers);
         btn_personalInfo = view.findViewById(R.id.btn_personalInfo);
         btn_resetPassword = view.findViewById(R.id.btn_resetPassword);
+        btn_location = view.findViewById(R.id.btn_location);
+
         btn_purchaseHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,6 +96,14 @@ public class AccountFragment extends Fragment {
                 resetPasswordFragment.setArguments(bundle);
                 getFragmentManager().beginTransaction().replace(R.id.id_AccountBaseActivity, resetPasswordFragment).addToBackStack("null").commit();
 
+            }
+        });
+
+        btn_location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                getFragmentManager().beginTransaction().replace(R.id.id_AccountBaseActivity, new LocationFragment()).addToBackStack("null").commit();
             }
         });
 
