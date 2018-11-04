@@ -18,6 +18,7 @@ import java.util.List;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder>{
 
+    private ClickListener clickListener;
     FeedDao feedDao;
     List<OrderData> orderDataList;
     Context ctx;
@@ -45,18 +46,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder>{
         viewHolder.tv_pPrice_cart.setText("$" + orderData.getPrize());
         viewHolder.tv_pQty_cart.setText("Qty - " + orderData.getQuantity());
 
-        viewHolder.tv_remove_cart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                feedDao.deleteItemCart("1",orderData.getPid());
-            }
-        });
-        viewHolder.btn_add_cart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                feedDao.updateCartQuantity(orderData.getQuantity()+1,orderData.getPid(),"1");
-            }
-        });
+    }
+
+    public void setClickListener(ClickListener clickListener) {
+        this.clickListener = clickListener;
     }
 
     @Override
@@ -80,7 +73,34 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder>{
             tv_remove_cart = itemView.findViewById(R.id.tv_remove_cart);
             btn_add_cart = itemView.findViewById(R.id.btn_add_cart);
 
+            btn_add_cart.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    if(clickListener != null)
+                    {
+                        clickListener.addItem(getAdapterPosition());
+                    }
+                }
+            });
+
+            tv_remove_cart.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    if(clickListener != null)
+                    {
+                        clickListener.deleteItem(getAdapterPosition());
+                    }
+                }
+            });
         }
 
+    }
+
+    public interface ClickListener
+    {
+        void addItem(int position);
+        void deleteItem(int position);
     }
 }

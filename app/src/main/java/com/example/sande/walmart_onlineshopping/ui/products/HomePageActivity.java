@@ -65,7 +65,14 @@ public class HomePageActivity extends AppCompatActivity
                         case R.id.navigation_home:
                             return true;
                         case R.id.navigation_cart:
+
                             Intent cart = new Intent(HomePageActivity.this,CartActivity.class);
+                            cart.putExtra("apiKey",getIntent().getStringExtra("API key"));
+                            cart.putExtra("userId",getIntent().getStringExtra("user_id"));
+                            cart.putExtra("mobile",getIntent().getStringExtra("mobile"));
+                            cart.putExtra("fName",getIntent().getStringExtra("fName"));
+                            cart.putExtra("lName",getIntent().getStringExtra("lName"));
+                            cart.putExtra("email",getIntent().getStringExtra("email"));
                             startActivity(cart);
                             return true;
                         case R.id.navigation_Account:

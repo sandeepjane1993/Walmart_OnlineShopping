@@ -1,8 +1,11 @@
 package com.example.sande.walmart_onlineshopping.ui.products;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.example.sande.walmart_onlineshopping.R;
 
@@ -43,4 +46,42 @@ public class ProductBaseActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().
                 replace(R.id.id_ProductBaseActivity, subDepartmentFragment).commit();
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.actionbar_home, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId())
+        {
+            case R.id.homeButton_AB:
+
+
+                String myUserId = getIntent().getStringExtra("key_userId");
+                String myfName = getIntent().getStringExtra("key_fName");
+                String mylName = getIntent().getStringExtra("key_lName");
+                String myEmail = getIntent().getStringExtra("key_email");
+                String myMobile = getIntent().getStringExtra("key_mobile");
+                String myApiKey = getIntent().getStringExtra("key_apiKey");
+
+                Intent intent = new Intent(this,HomePageActivity.class);
+                intent.putExtra("user_id",myUserId);
+                intent.putExtra("fName",myfName);
+                intent.putExtra("lName",mylName);
+                intent.putExtra("email",myEmail);
+                intent.putExtra("mobile",myMobile);
+                intent.putExtra("API key",myApiKey);
+
+                startActivity(intent);
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 }
+

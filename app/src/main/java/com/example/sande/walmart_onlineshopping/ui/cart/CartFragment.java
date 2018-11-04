@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.sande.walmart_onlineshopping.ui.payment.CheckoutActivity;
 import com.example.sande.walmart_onlineshopping.database.FeedDao;
@@ -29,6 +30,7 @@ public class CartFragment extends Fragment {
     FeedDao feedDao;
     TextView tv_subtotal, tv_taxes, tv_EstTotal,tv_topTotal;
     Button btn_proceedToCheckout;
+    double payment;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -51,8 +53,31 @@ public class CartFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
+        adapter.setClickListener(new CartAdapter.ClickListener() {
+            @Override
+            public void addItem(int position) {
+
+                feedDao.updateCartQuantity(myList.get(position).getQuantity()+1,myList.get(position).getPid(),myList.get(position).getMobile());
+
+            }
+
+            @Override
+            public void deleteItem(int position) {
+                feedDao.deleteItemCart(myList.get(position).getMobile(),myList.get(position).getPid());
+            }
+        });
 
         displayTotal();
+
+        int subtotal = 0;
+        for (int i = 0; i < myList.size(); i++) {
+            subtotal = subtotal + (Integer.parseInt(myList.get(i).getPrize()) * myList.get(i).getQuantity());
+        }
+
+        int taxes = (int) (subtotal * 0.08);
+        int estTotal = subtotal + taxes;
+        payment = (double) estTotal;
+
         btn_proceedToCheckout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,6 +96,7 @@ public class CartFragment extends Fragment {
                 i.putExtra("email",email);
                 i.putExtra("mobile",mobile);
                 i.putExtra("apiKey",apiKey);
+                i.putExtra("finalPrice",payment);
                 Log.i("cartFrag", "User Id in Card Frag" + mobile + "  " + email);
                 startActivity(i);
             }
@@ -92,4 +118,5 @@ public class CartFragment extends Fragment {
         tv_topTotal.setText("Est Total    $" + estTotal);
 
     }
+
 }

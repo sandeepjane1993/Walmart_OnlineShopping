@@ -54,7 +54,7 @@ public class FeedDao {
             do {
                 {
                     OrderData orderData = new OrderData();
-                    orderData.setImage(cursor.getString(1));
+                    orderData.setMobile(cursor.getString(1));
                     orderData.setPid(cursor.getString(2));
                     orderData.setPname(cursor.getString(3));
                     orderData.setQuantity(cursor.getInt(4));

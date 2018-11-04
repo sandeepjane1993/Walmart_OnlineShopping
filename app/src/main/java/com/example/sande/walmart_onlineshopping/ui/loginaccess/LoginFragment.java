@@ -78,8 +78,6 @@ public class LoginFragment extends Fragment {
                             String myMobile =  mydata.getString("mobile");
                             String myApiKey = mydata.getString("appapikey ");
 
-
-
                                 if (mymsg.equals("success"))
                                 {
 
@@ -97,9 +95,10 @@ public class LoginFragment extends Fragment {
 
 
                         } catch (JSONException e) {
+                            Toast.makeText(getActivity(), "wrong details", Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                         }
-                        Toast.makeText(getActivity(), "wrong details", Toast.LENGTH_SHORT).show();
+
 
                     }
                 }, new Response.ErrorListener() {

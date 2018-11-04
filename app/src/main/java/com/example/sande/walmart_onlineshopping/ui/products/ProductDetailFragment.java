@@ -129,6 +129,7 @@ public class ProductDetailFragment extends Fragment {
                 i.putExtra("email",email);
                 i.putExtra("mobile",mobile);
                 i.putExtra("apiKey",apiKey);
+                i.putExtra("lName",lName);
                 Log.i("detaildata", "OS after" + userId + "  " + apiKey);
                 startActivity(i);
             }

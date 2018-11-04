@@ -6,11 +6,14 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.sande.walmart_onlineshopping.R;
+import com.example.sande.walmart_onlineshopping.ui.products.HomePageActivity;
 import com.paypal.android.sdk.payments.PayPalConfiguration;
 import com.paypal.android.sdk.payments.PayPalPayment;
 import com.paypal.android.sdk.payments.PayPalService;
@@ -77,7 +80,8 @@ public class CheckoutActivity extends AppCompatActivity {
     }
 
     private PayPalPayment getThingToBuy(String paymentIntentSale) {
-        return new PayPalPayment(new BigDecimal("1.00"), "USD", "tshirt", paymentIntentSale);
+        double finalPay = getIntent().getDoubleExtra("finalPrice",0);
+        return new PayPalPayment(new BigDecimal(finalPay), "USD", "Total", paymentIntentSale);
     }
 
     @Override
@@ -148,5 +152,40 @@ public class CheckoutActivity extends AppCompatActivity {
 
         stopService(new Intent(this, PayPalService.class));
         super.onDestroy();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.actionbar_home, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId())
+        {
+            case R.id.homeButton_AB:
+
+
+                String userId = getIntent().getStringExtra("userId");
+                String fName = getIntent().getStringExtra("fName");
+                String email = getIntent().getStringExtra("email");
+                String mobile = getIntent().getStringExtra("mobile");
+                String apiKey = getIntent().getStringExtra("apiKey");
+
+                Intent intent = new Intent(this,HomePageActivity.class);
+                intent.putExtra("user_id",userId);
+                intent.putExtra("fName",fName);
+                intent.putExtra("email",email);
+                intent.putExtra("mobile",mobile);
+                intent.putExtra("API key",apiKey);
+
+                startActivity(intent);
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

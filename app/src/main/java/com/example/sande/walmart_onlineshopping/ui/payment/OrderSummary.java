@@ -1,8 +1,11 @@
 package com.example.sande.walmart_onlineshopping.ui.payment;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +18,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.sande.walmart_onlineshopping.R;
 import com.example.sande.walmart_onlineshopping.data.OrderData;
 import com.example.sande.walmart_onlineshopping.database.FeedDao;
+import com.example.sande.walmart_onlineshopping.ui.products.HomePageActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -81,7 +85,7 @@ public class OrderSummary extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
 
-                 Toast.makeText(OrderSummary.this, "" + response, Toast.LENGTH_LONG).show();
+                 //Toast.makeText(OrderSummary.this, "" + response, Toast.LENGTH_LONG).show();
                 Log.i("checkResponse", "onResponse: " +response);
                 try {
                     JSONObject jsonObject = new JSONObject(response);
@@ -140,5 +144,40 @@ public class OrderSummary extends AppCompatActivity {
         RequestQueue request5 = Volley.newRequestQueue(this);
         request5.add(request);
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.actionbar_home, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId())
+        {
+            case R.id.homeButton_AB:
+
+
+                String userId = getIntent().getStringExtra("userId");
+                String fName = getIntent().getStringExtra("fName");
+                String email = getIntent().getStringExtra("email");
+                String mobile = getIntent().getStringExtra("mobile");
+                String apiKey = getIntent().getStringExtra("apiKey");
+
+                Intent intent = new Intent(this,HomePageActivity.class);
+                intent.putExtra("user_id",userId);
+                intent.putExtra("fName",fName);
+                intent.putExtra("email",email);
+                intent.putExtra("mobile",mobile);
+                intent.putExtra("API key",apiKey);
+
+                startActivity(intent);
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
