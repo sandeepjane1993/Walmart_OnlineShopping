@@ -36,7 +36,6 @@ public class LocationFragment extends Fragment {
     Location mLastLocation;
     TextView tv_location;
     Button btn_location;
-    Handler handler;
     List<Address> addresses;
     Geocoder geocoder;
     FusedLocationProviderClient mFusedLocationProviderClient;
@@ -45,11 +44,31 @@ public class LocationFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_location,container,false);
 
         tv_location = view.findViewById(R.id.tv_location);
+        btn_location = view.findViewById(R.id.btn_getLocation);
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
 
 
+        getLocation();
+
+        geocoder = new Geocoder(getActivity(), Locale.getDefault());
+        btn_location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                new MyTask().execute();
+
+            }
+        });
+
+
+
+        return view;
+    }
+
+    private void getLocation() {
+
         if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-           // Toast.makeText(getActivity(), "Permission Granted", Toast.LENGTH_SHORT).show();
+            // Toast.makeText(getActivity(), "Permission Granted", Toast.LENGTH_SHORT).show();
 
             mFusedLocationProviderClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
                 @Override
@@ -65,11 +84,6 @@ public class LocationFragment extends Fragment {
         } else {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 10);
         }
-
-        geocoder = new Geocoder(getActivity(), Locale.getDefault());
-        new MyTask().execute();
-
-        return view;
     }
 
     public class MyTask extends AsyncTask<Void, Void, List<Address>>

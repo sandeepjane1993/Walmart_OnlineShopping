@@ -82,23 +82,29 @@ public class CartFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Bundle b = getArguments();
-                String userId =   b.getString("userId");
-                String fName =   b.getString("fName");
-                String email =   b.getString("email");
-                String mobile =   b.getString("mobile");
-                String apiKey =   b.getString("apiKey");
+                if(payment < 1)
+                {
+                    Toast.makeText(getActivity(), "Your cart is empty, please add ", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Bundle b = getArguments();
+                    String userId = b.getString("userId");
+                    String fName = b.getString("fName");
+                    String email = b.getString("email");
+                    String mobile = b.getString("mobile");
+                    String apiKey = b.getString("apiKey");
 
-                Log.i("cartFrag", "User Id in Card Frag" + userId + "  " + apiKey);
-                Intent i = new Intent(getActivity(),CheckoutActivity.class);
-                i.putExtra("userId",userId);
-                i.putExtra("fName",fName);
-                i.putExtra("email",email);
-                i.putExtra("mobile",mobile);
-                i.putExtra("apiKey",apiKey);
-                i.putExtra("finalPrice",payment);
-                Log.i("cartFrag", "User Id in Card Frag" + mobile + "  " + email);
-                startActivity(i);
+                    Log.i("cartFrag", "User Id in Card Frag" + userId + "  " + apiKey);
+                    Intent i = new Intent(getActivity(), CheckoutActivity.class);
+                    i.putExtra("userId", userId);
+                    i.putExtra("fName", fName);
+                    i.putExtra("email", email);
+                    i.putExtra("mobile", mobile);
+                    i.putExtra("apiKey", apiKey);
+                    i.putExtra("finalPrice", payment);
+                    Log.i("cartFrag", "User Id in Card Frag" + mobile + "  " + email);
+                    startActivity(i);
+                }
             }
         });
         return view;

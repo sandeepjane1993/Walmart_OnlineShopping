@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+    <ImageView
+        android:src="@drawable/wallylogo"
+        android:layout_width="match_parent"
+        android:layout_height="100dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
+
+    <TextView
+        android:layout_gravity="center"
+        android:textSize="25sp"
+        android:textColor="#0f0f0f"
+        android:text="Your feedback is important to us."
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp"/>
+
+    <TextView
+        android:background="#d7d5d5"
+        android:paddingLeft="10dp"
+        android:paddingTop="13dp"
+        android:text="My feedback is about:"
+        android:textColor="#0f0f0f"
+        android:textSize="18sp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp"/>
+
+    <EditText
+        android:hint="Tell us about your mobile experience"
+        android:layout_gravity="center"
+        android:textAlignment="gravity"
+        android:paddingTop="8dp"
+        android:paddingLeft="5dp"
+        android:gravity="top"
+        android:layout_width="350dp"
+        android:layout_height="270dp"
+        android:background="@drawable/edittext_box" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
+
+    <Button
+        android:id="@+id/btn_submit_feedback"
+        android:text="Submit"
+        android:textSize="17dp"
+        android:textAllCaps="false"
+        android:layout_gravity="center"
+        android:background="@drawable/button_curved"
+        android:textColor="#FCFCFC"
+        android:layout_width="160dp"
+        android:layout_height="40dp" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"/>
+
+    <TextView
+        android:textColor="#0f0f0f"
+        android:layout_gravity="center"
+        android:text="Sorry, but we can't respond directly to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:textColor="#0f0f0f"
+        android:layout_gravity="center"
+        android:text="comments shared here"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

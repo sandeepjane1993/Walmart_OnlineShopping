@@ -14,7 +14,8 @@ import com.example.sande.walmart_onlineshopping.ui.loginaccess.LoginActivity;
 
 public class AccountFragment extends Fragment {
 
-    Button btn_purchaseHistory, btn_topSellers, btn_signOut, btn_personalInfo, btn_resetPassword,btn_location;
+    Button btn_purchaseHistory, btn_topSellers, btn_signOut, btn_personalInfo, btn_resetPassword,btn_location,
+            btn_termsOfUse,btn_feedback;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -27,6 +28,8 @@ public class AccountFragment extends Fragment {
         btn_personalInfo = view.findViewById(R.id.btn_personalInfo);
         btn_resetPassword = view.findViewById(R.id.btn_resetPassword);
         btn_location = view.findViewById(R.id.btn_location);
+        btn_termsOfUse = view.findViewById(R.id.btn_termsofuse);
+        btn_feedback = view.findViewById(R.id.btn_feedback_Account);
 
         btn_purchaseHistory.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,6 +110,20 @@ public class AccountFragment extends Fragment {
             }
         });
 
+        btn_termsOfUse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                getFragmentManager().beginTransaction().replace(R.id.id_AccountBaseActivity, new TermsofUseFragment()).addToBackStack("null").commit();
+            }
+        });
+        btn_feedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                getFragmentManager().beginTransaction().replace(R.id.id_AccountBaseActivity, new FeedbackFragment()).addToBackStack("null").commit();
+            }
+        });
         return view;
     }
 }
