@@ -1,4 +1,4 @@
-package com.example.sande.walmart_onlineshopping.account;
+package com.example.sande.walmart_onlineshopping.ui.accountbase;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -18,7 +18,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.sande.walmart_onlineshopping.R;
-import com.example.sande.walmart_onlineshopping.account.OrderTrackFragment;
 import com.example.sande.walmart_onlineshopping.adapters.PurchaseHistoryAdapter;
 import com.example.sande.walmart_onlineshopping.data.PurchaseHistoryData;
 

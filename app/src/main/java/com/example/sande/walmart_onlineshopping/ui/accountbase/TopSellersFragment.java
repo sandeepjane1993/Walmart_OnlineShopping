@@ -1,4 +1,4 @@
-package com.example.sande.walmart_onlineshopping.account;
+package com.example.sande.walmart_onlineshopping.ui.accountbase;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;

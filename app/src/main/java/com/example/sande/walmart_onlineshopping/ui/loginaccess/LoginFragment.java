@@ -85,74 +85,83 @@ public class LoginFragment extends Fragment {
 
 
                 dialog.show();
-                StringRequest request = new StringRequest(Request.Method.POST, url2, new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
 
-                        dialog.dismiss();
-                       //Toast.makeText(getActivity(), "" + response, Toast.LENGTH_SHORT).show();
-                        try {
-                            JSONArray jsonArray = new JSONArray(response);
-                            JSONObject mydata = jsonArray.getJSONObject(0);
+                if (editText_password.getText().toString().length() < 6) {
+                    dialog.dismiss();
+                    Toast.makeText(getActivity(), "Password is too short", Toast.LENGTH_SHORT).show();
 
-                            String mymsg = mydata.getString("msg");
-                            String id = mydata.getString("id");
-                            String myFirstName =  mydata.getString("firstname");
-                            String myLastName =  mydata.getString("lastname");
-                            String myEmail =  mydata.getString("email");
-                            String myMobile =  mydata.getString("mobile");
-                            String myApiKey = mydata.getString("appapikey ");
-                            Log.i("cijiski", "onResponse: ");
-                                if (mymsg.equals("success"))
-                                {
+                } else if (editText_mobile.getText().toString().length() < 10) {
+                    dialog.dismiss();
+                    Toast.makeText(getActivity(), "Mobile number should be 10 digits", Toast.LENGTH_SHORT).show();
 
-                                    Intent intent = new Intent(getContext(),HomePageActivity.class);
-                                    intent.putExtra("user_id",id);
-                                    intent.putExtra("fName",myFirstName);
-                                    intent.putExtra("lName",myLastName);
-                                    intent.putExtra("email",myEmail);
-                                    intent.putExtra("mobile",myMobile);
-                                    intent.putExtra("API key",myApiKey);
+                } else {
+                    StringRequest request = new StringRequest(Request.Method.POST, url2, new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+
+                            dialog.dismiss();
+                            //Toast.makeText(getActivity(), "" + response, Toast.LENGTH_SHORT).show();
+                            try {
+                                JSONArray jsonArray = new JSONArray(response);
+                                JSONObject mydata = jsonArray.getJSONObject(0);
+
+                                String mymsg = mydata.getString("msg");
+                                String id = mydata.getString("id");
+                                String myFirstName = mydata.getString("firstname");
+                                String myLastName = mydata.getString("lastname");
+                                String myEmail = mydata.getString("email");
+                                String myMobile = mydata.getString("mobile");
+                                String myApiKey = mydata.getString("appapikey ");
+                                Log.i("cijiski", "onResponse: ");
+                                if (mymsg.equals("success")) {
+
+                                    Intent intent = new Intent(getContext(), HomePageActivity.class);
+                                    intent.putExtra("user_id", id);
+                                    intent.putExtra("fName", myFirstName);
+                                    intent.putExtra("lName", myLastName);
+                                    intent.putExtra("email", myEmail);
+                                    intent.putExtra("mobile", myMobile);
+                                    intent.putExtra("API key", myApiKey);
 
                                     startActivity(intent);
 
                                 }
 
 
-                        } catch (JSONException e) {
-                            Toast.makeText(getActivity(), "wrong details", Toast.LENGTH_SHORT).show();
-                            e.printStackTrace();
+                            } catch (JSONException e) {
+                                Toast.makeText(getActivity(), "wrong details", Toast.LENGTH_SHORT).show();
+                                e.printStackTrace();
+                            }
+
+
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+
+                            dialog.dismiss();
+                            Toast.makeText(getActivity(), "" + error, Toast.LENGTH_SHORT).show();
+                        }
+                    }) {
+
+                        @Override
+                        protected Map<String, String> getParams() {
+                            Map<String, String> params = new HashMap<String, String>();
+                            Log.i("wheeee", "getParams: hooooooooooooooooooooooooooooooooooo");
+
+                            String mob = editText_mobile.getText().toString();
+                            String pass = editText_password.getText().toString();
+
+                            params.put("mobile", mob);
+                            params.put("password", pass);
+                            return params;
                         }
 
+                    };
+                    RequestQueue request1 = Volley.newRequestQueue(getActivity());
+                    request1.add(request);
 
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-
-                        dialog.dismiss();
-                        Toast.makeText(getActivity(), "" + error, Toast.LENGTH_SHORT).show();
-                    }
-                })
-                {
-
-                    @Override
-                    protected Map<String, String> getParams() {
-                        Map<String, String> params = new HashMap<String, String>();
-                        Log.i("wheeee", "getParams: hooooooooooooooooooooooooooooooooooo");
-
-                        String mob = editText_mobile.getText().toString();
-                         String pass = editText_password.getText().toString();
-
-                        params.put("mobile", mob);
-                        params.put("password", pass);
-                        return params;
-                    }
-
-                };
-                RequestQueue request1 = Volley.newRequestQueue(getActivity());
-                request1.add(request);
-
+                }
             }
         });
 

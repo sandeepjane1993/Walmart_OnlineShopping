@@ -32,7 +32,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.sande.walmart_onlineshopping.account.AccountBaseActivity;
+import com.example.sande.walmart_onlineshopping.ui.accountbase.AccountBaseActivity;
 import com.example.sande.walmart_onlineshopping.adapters.HomePageAdaptor;
 import com.example.sande.walmart_onlineshopping.R;
 import com.example.sande.walmart_onlineshopping.data.HomeDepartmentData;

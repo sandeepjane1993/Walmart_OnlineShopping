@@ -1,4 +1,4 @@
-package com.example.sande.walmart_onlineshopping.account;
+package com.example.sande.walmart_onlineshopping.ui.accountbase;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -55,6 +55,7 @@ public class LocationFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
+                tv_location.setText("Loading .... Plz wait");
                 new MyTask().execute();
 
             }

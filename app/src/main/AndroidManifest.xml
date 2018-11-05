@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.loginaccess.SplashActivity">
+        <activity android:name=".ui.loginaccess.SplashActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -48,7 +49,7 @@
         <activity android:name=".ui.cart.CartActivity" />
         <activity android:name=".ui.payment.CheckoutActivity" />
         <activity android:name=".ui.payment.OrderSummary" />
-        <activity android:name=".account.AccountBaseActivity"></activity>
+        <activity android:name=".ui.accountbase.AccountBaseActivity"></activity>
     </application>
 
 </manifest>
